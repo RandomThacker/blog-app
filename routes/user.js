@@ -15,8 +15,15 @@ router.post("/signup", async (req,res)=>{
     await User.create({
         fullName,
         email,
-        password
+        password,
     })
+    return res.redirect('/')
+})
+
+router.post("/signin", async (req,res)=>{
+    const{email, password} = req.body;
+    const user =await User.matchpassword(email, password);
+    console.log("USer",user)
     return res.redirect('/')
 })
 
