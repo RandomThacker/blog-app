@@ -1,12 +1,14 @@
 const express = require("express")
 const path = require("path")
-const userRoute = require("./routes/user")
 const mongoose = require("mongoose")
 const cookieParser = require("cookie-parser")
 const { checkForAuthenticationCookie } = require("./middlewares/authentication")
 
 const app = express()
 const PORT = 8000;
+
+const userRoute = require("./routes/user")
+const blogRoute = require("./routes/blog")
 
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
@@ -23,5 +25,6 @@ app.get("/", (req,res)=>{
 })
 
 app.use("/user", userRoute)
+app.use("/blog", blogRoute)
 
 app.listen(PORT, ()=> console.log("Server started at", PORT))
